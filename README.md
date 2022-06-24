@@ -43,11 +43,11 @@ This will build the package, and install it directly into your [virtual environm
 
 Using wget
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-set-generator-cli/main/installer)
+bash <(wget -qO- https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-set-generator-cli/main/installer) && source venv/bin/activate
 ```
 Using curl
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-set-generator-cli/main/installer)
+bash <(curl -s https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-set-generator-cli/main/installer) && source venv/bin/activate
 ```
 
 Once installed, you should be able to test the script.
