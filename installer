@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+git clone git@github.com:sanchezcarlosjr/non-dominated-set-generator-cli.git
+cd non-dominated-set-generator-cli
+python3 -m venv venv
+source venv/bin/activate
+pip install wheel
+cd publish
+sh publish_local.sh
+cd ..
+source venv/bin/activate
+echo "Ready! 🥳"
