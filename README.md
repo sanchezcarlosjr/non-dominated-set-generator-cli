@@ -38,13 +38,12 @@ For example, this configuration will let you execute `run-my-app` as a command d
 
 The `package_name_override` will be what we attempt to publish the package as, so make sure it is unique on PyPI.
 
-## Publish Locally
+## Local installation
 
-This will build the package, and install it directly into your current Python environment.
+This will build the package, and install it directly into your [virtual environment](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment).
 
 ```bash
-cd publish
-sh ./publish_local.sh
+sh publish/publish_local.sh && source venv/bin/activate 
 ```
 
 Once installed, you should be able to test the script.
@@ -82,10 +81,6 @@ This will build it into a package like so: https://pypi.org/project/pixegami-my-
 ## Testing
 
 To run the tests, you need to install `pytest`, which is already in the `developer_requirements.txt`.
-
-```bash
-pip install pytest
-```
 
 From the project root, you can run this to test and print all output:
 
