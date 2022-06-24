@@ -6,6 +6,7 @@ source venv/bin/activate
 pip install wheel
 cd publish
 sh publish_local.sh
+pip install -r developer_requirements.txt 
 cd ..
 source venv/bin/activate
 echo "Ready! 🥳"

@@ -39,11 +39,15 @@ For example, this configuration will let you execute `run-my-app` as a command d
 The `package_name_override` will be what we attempt to publish the package as, so make sure it is unique on PyPI.
 
 ## Local installation
-
 This will build the package, and install it directly into your [virtual environment](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment).
 
+Using wget
 ```bash
-sh publish/publish_local.sh && source venv/bin/activate 
+bash <(wget -qO- https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-set-generator-cli/main/installer)
+```
+Using curl
+```bash
+bash <(curl -s https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-set-generator-cli/main/installer)
 ```
 
 Once installed, you should be able to test the script.
