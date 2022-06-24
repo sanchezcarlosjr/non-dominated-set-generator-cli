@@ -1,12 +1,12 @@
 {
-  "author": "Pixegami",
-  "package_name_override": "pixegami-my-app",
-  "email": "pixegami@gmail.com",
-  "description": "A template Python CLI app.",
-  "url": "https://github.com/pixegami/python-cli-template",
+  "author": "sanchezcarlosjr",
+  "package_name_override": "nondominated-set-generator-cli",
+  "email": "hello@sanchezcarlosjr.com",
+  "description": "Nondominated set generator cli",
+  "url": "https://github.com/sanchezcarlosjr/non-dominated-set-generator-cli",
   "python_version": "3.8",
-  "version": "1.0.9",
+  "version": "1.0.0",
   "scripts": [
-    "run-my-app = my_app:main"
+    "gen-set = app:main"
   ]
 }

@@ -1,4 +1,4 @@
-from src.my_app import main, square, __version__
+from src.app import main, square, __version__
 from unittest.mock import Mock
 
 # To test the entire project and print output, run this from the root directory:
