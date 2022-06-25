@@ -2,6 +2,7 @@ import argparse
 from ._version import __version__
 from .pareto_front_generator import ParetoFrontGenerator
 from .file_view import FileView
+from .loader import Loader 
 import time
 
 def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominated set generator")):
@@ -15,7 +16,7 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
         "-p", "--points", type=int, required=False, help="generate number of points", default=50
     )
     parser.add_argument(
-        "-t", "--translation", type=int, nargs='*', help="apply translation to generated space", default=[0]
+        "-t", "--translation", type=float, nargs='*', help="apply translation to generated space", default=[0]
     )
     parser.add_argument(
             "-f", "--file", required=False, help="file's name", default=str(time.ctime()).replace(" ", "_")+".pof"
@@ -24,7 +25,8 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
 
     if args.version:
         return __version__
-    pareto_front_generator = ParetoFrontGenerator(dim=args.dimension, points=args.points, translation=args.translation)
-    pareto_front = pareto_front_generator.generate_space()
-    fileView = FileView(args.file, pareto_front)
-    fileView.make()
+    with Loader("Generating non-dominated set (aka pareto front)..."):
+        pareto_front_generator = ParetoFrontGenerator(dim=args.dimension, points=args.points, translation=args.translation)
+        pareto_front = pareto_front_generator.generate_space()
+        fileView = FileView(args.file, pareto_front)
+        fileView.make()

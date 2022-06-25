@@ -53,13 +53,13 @@ bash <(curl -s https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-s
 Once installed, you should be able to test the script.
 
 ```bash
-run-my-app
-# Executing 'main()' from my app!
-# Hello World
+gen-set --help
+```
 
-run-my-app --version 
-# Executing 'main()' from my app!
-# 0.0.7
+``` bash
+gen-set
+# Generating non-dominated set (aka pareto front).
+# Ready!
 ```
 
 ## Publish to PyPI
