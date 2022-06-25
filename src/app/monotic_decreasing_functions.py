@@ -5,7 +5,7 @@ def search_monotic_decreasing_function_subclasses():
     return [re.search(r"'app.monotic_decreasing_functions\.(.*)'", str(subclass)).group(1) for subclass in MonoticDecreasingFunction.__subclasses__()]
 
 def monotic_decreasing_function_factory(string):
-    return globals()[string]
+    return globals()[string]()
 
 class MonoticDecreasingFunction:
     def get_domain(self, points):
