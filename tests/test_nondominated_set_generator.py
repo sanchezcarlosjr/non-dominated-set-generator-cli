@@ -1,6 +1,6 @@
 import numpy as np
 import operator
-from src.app import ParetoFrontGenerator
+from src.app import ParetoFrontGenerator, search_monotic_decreasing_function_subclasses
 maxO = (operator.ge, operator.gt)
 minO = (operator.le, operator.lt)
 dominates = lambda y, y1, op=minO: np.all(op[0](y,y1)) and np.any(op[1](y,y1))
@@ -24,6 +24,8 @@ def teardown():
     # This should execute at the end of each test.
     print("Executing Teardown")
 
+def test_search_all_subclasses():
+    assert search_monotic_decreasing_function_subclasses() == ["Polynomial", "Sqrt", "Exponential", "Cos"]
 
 # To test a specific function...
 # python -m pytest -s tests/test_nondominated_set_generator.py
