@@ -1,2 +1,4 @@
 from ._version import __version__
-from .app import main, square
+from .pareto_front_generator import ParetoFrontGenerator
+from .app import main
+from .file_view import FileView
