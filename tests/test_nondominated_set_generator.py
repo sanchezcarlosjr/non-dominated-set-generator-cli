@@ -1,6 +1,6 @@
 import numpy as np
 import operator
-from src.app import ParetoFrontGenerator, search_monotic_decreasing_function_subclasses
+from src.app import ParetoFrontGenerator, Polynomial, Exponential, Sqrt, Cos
 maxO = (operator.ge, operator.gt)
 minO = (operator.le, operator.lt)
 dominates = lambda y, y1, op=minO: np.all(op[0](y,y1)) and np.any(op[1](y,y1))
@@ -24,22 +24,32 @@ def teardown():
     # This should execute at the end of each test.
     print("Executing Teardown")
 
-def test_search_all_subclasses():
-    assert search_monotic_decreasing_function_subclasses() == ["Polynomial", "Sqrt", "Exponential", "Cos"]
-
 # To test a specific function...
 # python -m pytest -s tests/test_nondominated_set_generator.py
-def test_generate_nondominated_set_polynomial_dim2():
-    pareto = ParetoFrontGenerator(dim=2, points=60, translation=0.7)
-    space = pareto.generate_space()
-    assert is_a_non_dominated_set(space)
+def test_generate_nondominated_set_polynomial_dim_n():
+    for n in range(2, 50):
+          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0)
+          space = pareto.generate_space()
+          assert space.shape[1] == n and 2 <= space.shape[0] <= 100
+          assert is_a_non_dominated_set(space)
 
-def test_generate_nondominated_set_polynomial_dim3():
-    pareto = ParetoFrontGenerator(dim=3, points=60, translation=0.7)
-    space = pareto.generate_space()
-    assert is_a_non_dominated_set(space)
+def test_generate_nondominated_set_sqrt_dim_n():
+    for n in range(2, 50):
+          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Sqrt())
+          space = pareto.generate_space()
+          assert space.shape[1] == n and 2 <= space.shape[0] <= 100
+          assert is_a_non_dominated_set(space)
 
-def test_generate_nondominated_set_polynomial_dim2_and_it_translates():
-    pareto = ParetoFrontGenerator(dim=2, points=60, translation=0)
-    space = pareto.generate_space()
-    assert is_a_non_dominated_set(space)
+def test_generate_nondominated_set_expontential_dim_n():
+    for n in range(2, 15):
+          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Exponential())
+          space = pareto.generate_space()
+          assert space.shape[1] == n and 2 <= space.shape[0] <= 100
+          assert is_a_non_dominated_set(space)
+
+def test_generate_nondominated_set_cos_dim_n():
+    for n in range(2, 5):
+          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Cos())
+          space = pareto.generate_space()
+          assert space.shape[1] == n and 2 <= space.shape[0] <= 100
+          assert is_a_non_dominated_set(space)

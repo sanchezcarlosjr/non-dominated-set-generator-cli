@@ -19,7 +19,7 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
     parser.add_argument(
         "-m", "--function", 
         required=False, 
-        help="it applies monotic decreasing function R^n -> R such that Df<0 in (R^n)+ in order to generate non-dominated space", 
+        help="it applies monotic decreasing function R^n -> R such that f>=0, Df<=0 in Domain ⊆ (R^n)+ in order to generate non-dominated space", 
         default=Polynomial,
         choices=search_monotic_decreasing_function_subclasses()
     )
