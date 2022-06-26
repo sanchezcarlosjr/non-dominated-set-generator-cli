@@ -3,7 +3,7 @@ from ._version import __version__
 from .pareto_front_generator import ParetoFrontGenerator
 from .file_view import FileView
 from .loader import Loader 
-from .monotic_decreasing_functions import monotic_decreasing_function_factory, search_monotic_decreasing_function_subclasses, Polynomial
+from .monotic_decreasing_functions import monotic_decreasing_function_factory, search_monotic_decreasing_function_subclasses
 import time
 
 

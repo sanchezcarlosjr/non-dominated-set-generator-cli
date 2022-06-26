@@ -1,6 +1,6 @@
 import numpy as np
 import operator
-from src.app import ParetoFrontGenerator, Polynomial, Exponential, Sqrt, Cos
+from src.app import *
 maxO = (operator.ge, operator.gt)
 minO = (operator.le, operator.lt)
 dominates = lambda y, y1, op=minO: np.all(op[0](y,y1)) and np.any(op[1](y,y1))
@@ -52,4 +52,18 @@ def test_generate_nondominated_set_cos_dim_n():
           pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Cos())
           space = pareto.generate_space()
           assert space.shape[1] == n and 8 <= space.shape[0] <= 100
+ 
+def test_generate_nondominated_set_erf_dim_n():
+    for n in range(2, 3):
+          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Erf())
+          space = pareto.generate_space()
+          assert space.shape[1] == n and 8 <= space.shape[0] <= 100
           assert is_a_non_dominated_set(space)
+
+def test_generate_nondominated_set_tan_dim_n():
+    for n in range(2, 20):
+          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Tan())
+          space = pareto.generate_space()
+          assert space.shape[1] == n and 8 <= space.shape[0] <= 100
+          assert is_a_non_dominated_set(space)
+
