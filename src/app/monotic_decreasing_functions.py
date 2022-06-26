@@ -26,18 +26,14 @@ class Sqrt(MonoticDecreasingFunction):
     return -np.sqrt(np.sum(fs, axis=0))+10
 
 class Exponential(MonoticDecreasingFunction):
-  def __init__(self):
-      self.n = 5
-      self.b = np.exp(self.n)
-      self.a = 20
   def get_domain(self, points):
-    return np.linspace(0, self.a+self.n, points)
+    return np.linspace(0, 20, points)
   def get_image(self, fs):
-    return -np.exp(np.sum(fs, axis=0)-self.a)+self.b
+    return -np.exp(np.sum(fs, axis=0)-10)+np.exp(20)
 
 class Cos(MonoticDecreasingFunction):
   def get_domain(self, points):
-    return np.linspace(0, np.pi/2, points)
+    return np.linspace(0, 10*np.pi, points)
   def get_image(self, fs):
-    return np.cos(np.sum(fs, axis=0))
+    return np.cos(np.sum(fs, axis=0)-20)-np.sum(fs, axis=0)+1000
 

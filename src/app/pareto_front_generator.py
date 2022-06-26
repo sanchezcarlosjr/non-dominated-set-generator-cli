@@ -9,7 +9,14 @@ class ParetoFrontGenerator:
     self.dim = dim
     self.points = points
     self.translation = translation
-    self.function = function
+    self.function = function 
+  def search(self):
+      points = self.points
+      while True:
+            pareto_front = self.generate_space()
+            if abs(self.points-pareto_front.shape[0])/self.points <= 0.1:
+                return pareto_front
+            points += 1
   def generate_space(self):
     fs = []
     for n in range(0, self.dim-1):

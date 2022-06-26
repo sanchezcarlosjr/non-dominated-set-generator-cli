@@ -6,6 +6,7 @@ from .loader import Loader
 from .monotic_decreasing_functions import monotic_decreasing_function_factory, search_monotic_decreasing_function_subclasses, Polynomial
 import time
 
+
 def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominated set generator")):
     parser.add_argument(
         "-v", "--version", action="store_true", help="shows the app version"
@@ -20,7 +21,7 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
         "-m", "--function", 
         required=False, 
         help="it applies monotic decreasing function R^n -> R such that f>=0, Df<=0 in Domain ⊆ (R^n)+ in order to generate non-dominated space", 
-        default=Polynomial,
+        default="Polynomial",
         choices=search_monotic_decreasing_function_subclasses()
     )
     parser.add_argument(
@@ -35,11 +36,11 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
         return __version__
     with Loader("Generating non-dominated set (aka pareto front)..."):
         pareto_front_generator = ParetoFrontGenerator(
-                dim=args.dimension, 
-                points=args.points, 
-                translation=args.translation, 
-                function=monotic_decreasing_function_factory(args.function)
-                )
-        pareto_front = pareto_front_generator.generate_space()
+            dim=args.dimension, 
+            points=args.points,
+            translation=args.translation,
+            function=monotic_decreasing_function_factory(args.function)
+        )
+        pareto_front = pareto_front_generator.search()
         fileView = FileView(args.file, pareto_front)
         fileView.make()
