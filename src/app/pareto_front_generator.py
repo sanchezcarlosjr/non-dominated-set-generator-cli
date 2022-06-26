@@ -8,19 +8,20 @@ class ParetoFrontGenerator:
   def __init__(self, dim=2, points=5, translation=0, function=Polynomial()):
     self.dim = dim
     self.points = points
+    self.fit_points = points
     self.translation = translation
     self.function = function 
   def search(self):
-      points = self.points
       while True:
             pareto_front = self.generate_space()
-            if abs(self.points-pareto_front.shape[0])/self.points <= 0.1:
+            relative_error = abs(self.points-pareto_front.shape[0])/self.points
+            if relative_error <= 0.1:
                 return pareto_front
-            points += 1
+            self.fit_points += 1
   def generate_space(self):
     fs = []
     for n in range(0, self.dim-1):
-      fs.append(self.meshgrid(self.function.get_domain(self.points)))
+      fs.append(self.meshgrid(self.function.get_domain(self.fit_points)))
     fs.append(self.function.get_image(np.array(fs)))
     fs = np.array(fs)
     space= normalize_by_l2(fs)
