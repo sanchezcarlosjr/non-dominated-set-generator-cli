@@ -41,6 +41,6 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
             translation=args.translation,
             function=monotic_decreasing_function_factory(args.function)
         )
-        pareto_front = pareto_front_generator.search()
+        pareto_front = pareto_front_generator.generate_space()
         fileView = FileView(args.file, pareto_front)
         fileView.make()

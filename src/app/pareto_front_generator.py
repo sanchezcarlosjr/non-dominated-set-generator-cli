@@ -19,18 +19,15 @@ class ParetoFrontGenerator:
                 return pareto_front
             self.fit_points += 1
   def generate_space(self):
-    fs = []
-    for n in range(0, self.dim-1):
-      fs.append(self.meshgrid(self.function.get_domain(self.fit_points)))
-    fs.append(self.function.get_image(np.array(fs)))
-    fs = np.array(fs)
-    space= normalize_by_l2(fs)
+    domain = self.get_domain()
+    f = np.append(domain, np.array([self.function.get_image(domain)]), axis=0)
+    space= normalize_by_l2(f)
     space = space.T
     space = space+self.translation
     space = space[(space <= 1).all(axis=1)]
     space = space[(space >= 0).all(axis=1)]
     return space
-  def meshgrid(self, x):
-    if self.dim <= 2:
-      return x
-    return np.array(np.meshgrid(x)).flatten()
+  def get_domain(self):
+    domain = np.array(np.meshgrid(*[self.function.get_domain(self.fit_points) for _ in range(0, self.dim-1)]))
+    domain = domain.flatten()
+    return domain.reshape(self.dim-1, len(domain)//(self.dim-1)) 

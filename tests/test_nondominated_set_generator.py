@@ -27,43 +27,43 @@ def teardown():
 # To test a specific function...
 # python -m pytest -s tests/test_nondominated_set_generator.py
 def test_generate_nondominated_set_polynomial_dim_n():
-    for n in range(2, 20):
-          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0)
+    for n in range(2, 4):
+          pareto = ParetoFrontGenerator(dim=n, points=10, translation=0)
           space = pareto.generate_space()
-          assert space.shape[1] == n and 2 <= space.shape[0] <= 100
+          assert space.shape[1] == n and 10 <= space.shape[0]
           assert is_a_non_dominated_set(space)
 
 def test_generate_nondominated_set_sqrt_dim_n():
-    for n in range(2, 20):
-          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Sqrt())
+    for n in range(2, 4):
+          pareto = ParetoFrontGenerator(dim=n, points=10, translation=0, function=Sqrt())
           space = pareto.generate_space()
-          assert space.shape[1] == n and 2 <= space.shape[0] <= 100
+          assert space.shape[1] == n and 10 <= space.shape[0] 
           assert is_a_non_dominated_set(space)
 
 def test_generate_nondominated_set_expontential_dim_n():
-    for n in range(2, 20):
-          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Exponential())
+    for n in range(2, 4):
+          pareto = ParetoFrontGenerator(dim=n, points=10, translation=0, function=Exponential())
           space = pareto.generate_space()
-          assert space.shape[1] == n and 8 <= space.shape[0] <= 100
+          assert space.shape[1] == n and 10 <= space.shape[0]
           assert is_a_non_dominated_set(space)
 
 def test_generate_nondominated_set_cos_dim_n():
-    for n in range(2, 20):
-          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Cos())
+    for n in range(2, 4):
+          pareto = ParetoFrontGenerator(dim=n, points=10, translation=0, function=Cos())
           space = pareto.generate_space()
-          assert space.shape[1] == n and 8 <= space.shape[0] <= 100
+          assert space.shape[1] == n and 10 <= space.shape[0]
  
 def test_generate_nondominated_set_erf_dim_n():
     for n in range(2, 3):
-          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Erf())
+          pareto = ParetoFrontGenerator(dim=n, points=10, translation=0, function=Erf())
           space = pareto.generate_space()
-          assert space.shape[1] == n and 8 <= space.shape[0] <= 100
+          assert space.shape[1] == n and 10 <= space.shape[0]
           assert is_a_non_dominated_set(space)
 
 def test_generate_nondominated_set_tan_dim_n():
-    for n in range(2, 20):
-          pareto = ParetoFrontGenerator(dim=n, points=100, translation=0, function=Tan())
+    for n in range(2, 4):
+          pareto = ParetoFrontGenerator(dim=n, points=10, translation=0, function=Tan())
           space = pareto.generate_space()
-          assert space.shape[1] == n and 8 <= space.shape[0] <= 100
+          assert space.shape[1] == n and 10 <= space.shape[0]
           assert is_a_non_dominated_set(space)
 
