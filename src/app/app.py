@@ -28,17 +28,20 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
         "-t", "--translation", type=float, nargs='*', help="it translates generated space", default=[0]
     )
     parser.add_argument(
+        "-a", "--alpha", type=float, nargs='*', help="it applies alpha to Dirichlet Simplex.", default=[1]
+    )
+    parser.add_argument(
             "-f", "--file", required=False, help="it writes a file given a file's name", default=str(time.ctime()).replace(" ", "_")+".pof"
     )
     args = parser.parse_args()
 
     if args.version:
         return __version__
-    with Loader("Generating non-dominated set (aka pareto front)..."):
-        pareto_front_generator = ParetoFrontGenerator(
-            function=monotic_decreasing_function_factory(args.function, args.dimension, args.points),
+    pareto_front_generator = ParetoFrontGenerator(
+            function=monotic_decreasing_function_factory(args.function, args.dimension, args.points, args.alpha),
             translation=args.translation
-        )
-        pareto_front = pareto_front_generator.generate_space()
-        fileView = FileView(args.file, pareto_front)
-        fileView.make()
+    )
+    pareto_front = pareto_front_generator.generate_space()
+    fileView = FileView(args.file, pareto_front)
+    fileView.make()
+    print(args.file)

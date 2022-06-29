@@ -67,9 +67,18 @@ def test_generate_nondominated_set_tan_dim_n():
           assert space.shape[1] == n and 10 <= space.shape[0]
           assert is_a_non_dominated_set(space)
 
-def test_generate_nondominated_set_simplex():
+def test_generate_nondominated_set_random_simplex_dim_n():
     for n in range(2, 20):
-         pareto = ParetoFrontGenerator(function=Simplex(dim=n, points=50))
+         pareto = ParetoFrontGenerator(function=RandomSimplex(dim=n, points=50))
          space = pareto.generate_space()
          assert space.shape[1] == n and space.shape[0] == 50
          assert is_a_non_dominated_set(space)
+
+def test_generate_nondominated_set_dirichlet_simplex_dim_n():
+    for n in range(2, 20):
+         pareto = ParetoFrontGenerator(function=DirichletSimplex(n, 10, [1]))
+         space = pareto.generate_space()
+         assert space.shape[1] == n and space.shape[0] >= 10
+         assert is_a_non_dominated_set(space)
+
+

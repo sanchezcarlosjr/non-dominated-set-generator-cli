@@ -62,9 +62,14 @@ genset
 # Ready!
 ```
 
-# Activate
+## Activate virtual environment
 ```bash
 source venv/bin/activate
+```
+
+## Plot on gnuplot
+```bash
+gnuplot -e "splot '$(genset -d 3)'; pause -1"
 ```
 
 ## Publish to PyPI
