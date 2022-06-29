@@ -53,13 +53,18 @@ bash <(curl -s https://raw.githubusercontent.com/sanchezcarlosjr/non-dominated-s
 Once installed, you should be able to test the script.
 
 ```bash
-gen-set --help
+genset --help
 ```
 
 ``` bash
-gen-set
+genset
 # Generating non-dominated set (aka pareto front).
 # Ready!
+```
+
+# Activate
+```bash
+source venv/bin/activate
 ```
 
 ## Publish to PyPI

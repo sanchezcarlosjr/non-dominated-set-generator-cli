@@ -5,8 +5,8 @@
   "description": "Nondominated set generator cli",
   "url": "https://github.com/sanchezcarlosjr/non-dominated-set-generator-cli",
   "python_version": "3.8",
-  "version": "1.0.69",
+  "version": "1.0.76",
   "scripts": [
-    "gen-set = app:main"
+    "genset = app:main"
   ]
 }

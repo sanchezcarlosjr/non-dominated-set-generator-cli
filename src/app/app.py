@@ -36,10 +36,8 @@ def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominat
         return __version__
     with Loader("Generating non-dominated set (aka pareto front)..."):
         pareto_front_generator = ParetoFrontGenerator(
-            dim=args.dimension, 
-            points=args.points,
-            translation=args.translation,
-            function=monotic_decreasing_function_factory(args.function)
+            function=monotic_decreasing_function_factory(args.function, args.dimension, args.points),
+            translation=args.translation
         )
         pareto_front = pareto_front_generator.generate_space()
         fileView = FileView(args.file, pareto_front)
