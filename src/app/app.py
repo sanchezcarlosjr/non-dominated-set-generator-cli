@@ -7,7 +7,7 @@ from .monotic_decreasing_functions import monotic_decreasing_function_factory, s
 import time
 
 
-def main(parser=argparse.ArgumentParser(prog="gen-set", description="Non-dominated set generator")):
+def main(parser=argparse.ArgumentParser(prog="genset", description="Non-dominated set generator")):
     parser.add_argument(
         "-v", "--version", action="store_true", help="shows the app version"
     )
