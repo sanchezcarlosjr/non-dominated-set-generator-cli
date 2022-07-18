@@ -31,7 +31,7 @@ source venv/bin/activate
 
 ## Plot on gnuplot
 ```bash
-gnuplot -e "splot '$(genset -d 3)'; pause -1"
+gnuplot -e "plot [0:1][0:1] '$(genset -d 2)'; pause -1"
 ```
 
 ## Publish to PyPI

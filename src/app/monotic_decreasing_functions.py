@@ -8,21 +8,50 @@ def search_monotic_decreasing_function_subclasses():
 def monotic_decreasing_function_factory(string, dimension, points, *args):
     return globals()[string](dimension, points, *args)
 
+def search_normalization_subclasses():
+    return [re.search(r"'app.monotic_decreasing_functions\.(.*)'", str(subclass)).group(1) for subclass in Normalization.__subclasses__()]
 
-def normalize_by_l2(matrix):
-  return matrix / np.linalg.norm(matrix, axis=-1)[:, np.newaxis]
+def normalization_factory(string):
+    return globals()[string]()
+
+class Normalization:
+    def normalize(self, matrix):
+        pass
+
+class L2(Normalization):
+    def normalize(self, matrix):
+        return matrix / np.linalg.norm(matrix, axis=-1)[:, np.newaxis]
+
+class Max(Normalization):
+    def normalize(self, matrix):
+        return matrix / np.amax(matrix, axis=-1)[:, np.newaxis]
+
+class L1(Normalization):
+    def normalize(self, matrix):
+        return matrix/np.sum(matrix, axis=-1)[:, np.newaxis]
+
+class Factor(Normalization):
+    def normalize(self,matrix):
+        l2 = L2().normalize(matrix)
+        return l2/np.max(l2)
+
+class Null(Normalization):
+    def normalize(self, matrix):
+        return matrix
+
 
 class MonoticDecreasingFunction:
-    def __init__(self, dim, points, *args):
+    def __init__(self, dim, points, normalization, *args):
         self.dim = dim
         self.fit_points = points
+        self.normalization = normalization
         self.args = args
     def get_space(self):
         domain = np.array(np.meshgrid(*[self.get_domain(self.fit_points) for _ in range(0, self.dim-1)]))
         domain = domain.flatten()
         domain = domain.reshape(self.dim-1, len(domain)//(self.dim-1)) 
         space = np.append(domain, np.array([self.get_image(domain)]), axis=0)
-        space = normalize_by_l2(space)
+        space = self.normalization.normalize(space)
         space = space.T
         return space
     def get_domain(self):
