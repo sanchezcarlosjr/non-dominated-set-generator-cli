@@ -31,28 +31,29 @@ source venv/bin/activate
 
 ## Plot on gnuplot
 ```bash
-gnuplot -e "plot [0:1][0:1] '$(genset -d 2)'; pause -1"
+gnuplot -e "plot [0:1][0:1] '$(genset -d 2 -m Sqrt -n Max)'; pause -1"
 ```
-
-## Publish to PyPI
-
-First, you will need to [create an account on PyPI](https://pypi.org/account/register/). Then you need to export your PyPI credentials in the environment variables of your terminal.
-
-I like to do this by just adding the following exports to the `~/.bashrc` (or whichever file, depending on the terminal you are using).
 
 ```bash
-export PYPI_REPO_USER="YOUR_USERNAME"
-export PYPI_REPO_PASS="YOUR_PASSWORD"
+genset -d 2 -m Sqrt -n Max | xargs -I {} gnuplot -p -e "plot '<cat {}'; pause -1"
 ```
 
-The publish script will use these environment variables to upload your package to PyPI. Next, you can run the script:
+## Demos
+```bash
+   genset -d 2 -m Cos -n Max -p 500 | xargs -I {} gnuplot -p -e "plot '<cat {}'; pause -1"
+```
+![genset demo 1](../demos/genset-d2-mCos-nMax-p500.png)
 
 ```bash
-cd publish
-sh ./publish_remote.sh
+   genset -d 2 -m Cos -n Max -p 500 | xargs -I {} gnuplot -p -e "plot [0:1][0:1] '<cat {}'; pause -1"
 ```
+![genset demo 2](../demos/genset-d2-mErf-nMax-p500.png)
 
-This will build it into a package like so: https://pypi.org/project/pixegami-my-app/. Now you can install it directly with `pip install`.
+```bash
+   genset -d 3 -m Erf -n Max -p 500 | xargs -I {} gnuplot -p -e "splot [0:1][0:1][0:1] '<cat {}'; pause -1"
+```
+![genset demo 3](../demos/genset-d3-mErf-nMax-p500.png)
+
 
 ## Testing
 
@@ -61,7 +62,7 @@ To run the tests, you need to install `pytest`, which is already in the `develop
 From the project root, you can run this to test and print all output:
 
 ```bash
-python -m pytest -s
+
 ```
 
 Or to test a specific file or function:
@@ -73,6 +74,7 @@ python -m pytest -s tests/test_my_app.py
 # Test function test_app_main() in tests/test_my_app.py
 python -m pytest -s tests/test_my_app.py::test_app_main
 ```
+
 
 ## Versioning
 
