@@ -42,17 +42,17 @@ genset -d 2 -m Sqrt -n Max | xargs -I {} gnuplot -p -e "plot '<cat {}'; pause -1
 ```bash
    genset -d 2 -m Cos -n Max -p 500 | xargs -I {} gnuplot -p -e "plot '<cat {}'; pause -1"
 ```
-![genset demo 1](../demos/genset-d2-mCos-nMax-p500.png)
+![genset demo 1](./demos/genset-d2-mCos-nMax-p500.png)
 
 ```bash
    genset -d 2 -m Cos -n Max -p 500 | xargs -I {} gnuplot -p -e "plot [0:1][0:1] '<cat {}'; pause -1"
 ```
-![genset demo 2](../demos/genset-d2-mErf-nMax-p500.png)
+![genset demo 2](./demos/genset-d2-mErf-nMax-p500.png)
 
 ```bash
    genset -d 3 -m Erf -n Max -p 500 | xargs -I {} gnuplot -p -e "splot [0:1][0:1][0:1] '<cat {}'; pause -1"
 ```
-![genset demo 3](../demos/genset-d3-mErf-nMax-p500.png)
+![genset demo 3](./demos/genset-d3-mErf-nMax-p500.png)
 
 
 ## Testing
